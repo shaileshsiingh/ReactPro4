@@ -1,33 +1,59 @@
-import React from 'react';
-import Header from './components/Header';
-import Products from './components/Products';
-import Footer from './components/Footer';
-import './App.css'; // Add any custom styles in this file
+import React from "react";
+import Header from "./components/Header";
+import Products from "./components/Products";
+import Footer from "./components/Footer";
+import "./App.css"; // Add any custom styles in this file
 
 const App = () => {
-  const musicProducts = [
-    { title: 'Album 1', imageSrc: './img/Album 1.png', price: '12.99' },
-    { title: 'Album 2', imageSrc: './img/Album 2.png', price: '14.99' },
-    { title: 'Album 3', imageSrc: './img/Album 3.png', price: '9.99' },
-    { title: 'Album 4', imageSrc: './img/Album 4.png', price: '19.99' },
-  ];
+  const productsArr = [
+    {
+      title: "Colors",
 
-  const merchProducts = [
-    { title: 'T-Shirt', imageSrc: './img/Shirt.png', price: '19.99' },
-    { title: 'Coffee Cup', imageSrc: './img/Cofee.png', price: '6.99' },
+      price: 100,
+
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+    },
+
+    {
+      title: "Black and white Colors",
+
+      price: 50,
+
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+    },
+
+    {
+      title: "Yellow and Black Colors",
+
+      price: 70,
+
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+    },
+
+    {
+      title: "Blue Color",
+
+      price: 100,
+
+      imageUrl:
+        "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+    },
   ];
 
   return (
     <div id="EcommerceContainer">
-      <Header/>
+      <Header />
 
-      <Products title="MUSIC" products={musicProducts}/>
+      <Products title="MUSIC" products={productsArr} />
 
-      <Products title="MERCH" products={merchProducts}/>
+      {/* <Products title="MERCH" products={merchProducts} /> */}
 
       {/* Add the cart section here */}
 
-      <Footer/>
+      <Footer />
     </div>
   );
 };
