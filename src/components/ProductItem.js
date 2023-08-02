@@ -1,9 +1,15 @@
 // ProductItem.js
-import React from 'react';
+import React, { useContext } from 'react';
+import CartContext from './cart-context';
 
-const ProductItem = ({ title, imageUrl, price }) => {
+const ProductItem = ({ title, price, imageUrl }) => {
+  const elements = useContext(CartContext);
+
+  const handleAddToCart = () => {
+    elements.addItem({ title, price, imageUrl });
+  };
+
   return (
-    <div>
     <div id={title}>
       <h3>{title}</h3>
       <div className="image-container">
@@ -11,13 +17,12 @@ const ProductItem = ({ title, imageUrl, price }) => {
       </div>
       <div className="prod-details">
         <span>${price}</span>
-        <button className="shop-item-button" type="button">
+        <button className="shop-item-button" onClick={handleAddToCart}>
           ADD TO CART
         </button>
       </div>
     </div>
-    </div>
   );
 };
 
-export default ProductItem
+export default ProductItem;

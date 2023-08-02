@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Products from "./components/Products";
 import Footer from "./components/Footer";
 import "./App.css"; // Add any custom styles in this file
+import CartProvider from "./components/CartProvider";
 
 const App = () => {
   const productsArr = [
@@ -44,6 +45,7 @@ const App = () => {
   ];
 
   return (
+    <CartProvider>
     <div id="EcommerceContainer">
       <Header />
 
@@ -55,6 +57,8 @@ const App = () => {
 
       <Footer />
     </div>
+    </CartProvider>
+
   );
 };
 

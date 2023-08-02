@@ -1,9 +1,12 @@
 // Products.js
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ProductItem from './ProductItem';
+import CartContext from './cart-context';
 
 const Products = ({ title, products }) => {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <section className="container">
       <h2>{title}</h2>
@@ -12,7 +15,10 @@ const Products = ({ title, products }) => {
           <Row>
             {products.map((product, index) => (
               <Col md="6" key={index}>
-                <ProductItem {...product} />
+                <ProductItem
+                  {...product}
+                  onAddToCart={() => addToCart(product)}
+                />
               </Col>
             ))}
           </Row>
@@ -22,4 +28,4 @@ const Products = ({ title, products }) => {
   );
 };
 
-export default Products
+export default Products;

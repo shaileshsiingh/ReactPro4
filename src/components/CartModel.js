@@ -1,8 +1,10 @@
 // CartModal.js
-import React from 'react';
+import React, { useContext } from 'react';
 import CartItem from './CartItem';
+import CartContext from './cart-context';
 
 const CartModal = (props) => {
+  const elements = useContext(CartContext)
   return (
     <div >
       <h2>CART</h2>
@@ -10,14 +12,14 @@ const CartModal = (props) => {
         X
       </button>
       <div>
-        {props.cartElements.map((item, index) => (
+        {elements.cartElements.map((item, index) => (
           <CartItem
             key={index}
             title={item.title}
             price={item.price}
             imageUrl={item.imageUrl}
             quantity={item.quantity}
-            onRemove={() => props.onRemoveFromCart(index)}
+            onRemove={elements.removeItem}
           />
         ))}
       </div>

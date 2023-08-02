@@ -2,6 +2,7 @@
 import React from 'react';
 
 const CartItem = (props) => {
+  
   return (
     <div className="cart-item">
       <img src={props.imageUrl} alt={props.title} className="cart-image" />
