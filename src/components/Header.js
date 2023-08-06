@@ -1,8 +1,9 @@
 // Header.js
 import React, { useState, useContext } from 'react';
-import { Nav, NavItem, NavLink } from 'reactstrap';
+import { Nav, NavLink, NavItem } from 'reactstrap';
+import { Link } from 'react-router-dom'; // Import Link from 'react-router-dom'
 import CartContext from './cart-context';
-import CartModal from './CartModel';
+import CartModal from './CartModel'; // Fix the import name
 
 const Header = () => {
   const { cartElements } = useContext(CartContext);
@@ -16,13 +17,13 @@ const Header = () => {
     <header>
       <Nav className="header">
         <NavItem>
-          <NavLink href="/">HOME</NavLink>
+          <Link to="/">HOME</Link> {/* Fix NavLink to use Link */}
         </NavItem>
         <NavItem>
           <NavLink href="#">STORE</NavLink>
         </NavItem>
         <NavItem>
-          <NavLink href="/about">ABOUT</NavLink>
+          <Link to="/aboutus">ABOUT</Link>
         </NavItem>
         <a href="#cart" className="cart-holder" onClick={handleCartToggle}>
           cart<span className="cart-number">{cartElements.length}</span>
