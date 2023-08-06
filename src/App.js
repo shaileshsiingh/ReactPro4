@@ -6,6 +6,7 @@ import "./App.css"; // Add any custom styles in this file
 import CartProvider from "./components/CartProvider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import BrowserRouter, Routes, and Route
 import AboutPage from "./pages/About";
+import Home from "./pages/Home";
 
 const App = () => {
   const productsArr = [
@@ -37,6 +38,7 @@ const App = () => {
         <Router>
           <Header />
           <Routes>
+            <Route path="/Home" element={<Home/>}/>
             <Route path="/" element={<Products title="MUSIC" products={productsArr} />} />
             <Route path="/aboutus" element={<AboutPage />} />
           </Routes>
