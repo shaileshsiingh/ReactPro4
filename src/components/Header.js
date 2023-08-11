@@ -25,6 +25,9 @@ const Header = () => {
         <NavItem>
           <NavLink to="/aboutus" activeClassName="active-link">ABOUT</NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink to="/contact" activeClassName="active-link">CONTACT</NavLink>
+        </NavItem>
         <a href="#cart" className="cart-holder" onClick={handleCartToggle}>
           cart<span className="cart-number">{cartElements.length}</span>
         </a>

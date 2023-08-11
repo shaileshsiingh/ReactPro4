@@ -7,6 +7,7 @@ import CartProvider from "./components/CartProvider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import BrowserRouter, Routes, and Route
 import AboutPage from "./pages/About";
 import Home from "./pages/Home";
+import Contact from './pages/Contact'
 
 const App = () => {
   const productsArr = [
@@ -40,7 +41,9 @@ const App = () => {
           <Routes>
             <Route path="/Home" element={<Home/>}/>
             <Route path="/" element={<Products title="MUSIC" products={productsArr} />} />
-            <Route path="/aboutus" element={<AboutPage />} />
+            <Route path="/aboutus" element={<AboutPage/>} />
+            <Route path="/contact" element={<Contact/>} />
+
           </Routes>
           <Footer />
         </Router>
