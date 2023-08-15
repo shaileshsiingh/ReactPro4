@@ -8,28 +8,40 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Im
 import AboutPage from "./pages/About";
 import Home from "./pages/Home";
 import Contact from './pages/Contact'
+import ProductDetail from "./components/ProductDetail";
 
 const App = () => {
   const productsArr = [
     {
-      title: "Colors",
+      id:1,
+       title: "Colors",
       price: 100,
       imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+      Reviews : '4 out of 5 stars'
     },
     {
+      id:2,
       title: "Black and white Colors",
       price: 50,
       imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+      Reviews : '4 out of 5 stars'
+
     },
     {
+      id:3,
       title: "Yellow and Black Colors",
       price: 70,
       imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+      Reviews : '4 out of 5 stars'
+
     },
     {
+      id:4,
       title: "Blue Color",
       price: 100,
       imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
+      Reviews : '4 out of 5 stars'
+
     },
   ];
 
@@ -37,15 +49,17 @@ const App = () => {
     <CartProvider>
       <div id="EcommerceContainer">
         <Router>
+
           <Header />
           <Routes>
-            <Route path="/Home" element={<Home/>}/>
-            <Route path="/" element={<Products title="MUSIC" products={productsArr} />} />
-            <Route path="/aboutus" element={<AboutPage/>} />
-            <Route path="/contact" element={<Contact/>} />
-
+            <Route exact path="/" element={<Home/>}/>
+            <Route exact path="/products" element={<Products title="MUSIC" products={productsArr} />} />
+            <Route exact path="/aboutus" element={<AboutPage/>} />
+            <Route exact path="/contact" element={<Contact/>} />
+            <Route path="/products/:productId" element={<ProductDetail products={productsArr} />} />
           </Routes>
           <Footer />
+
         </Router>
       </div>
     </CartProvider>

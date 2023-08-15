@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import CartContext from './cart-context';
 
-const ProductItem = ({ title, price, imageUrl }) => {
+const ProductItem = ({id, title, price, imageUrl }) => {
   const elements = useContext(CartContext);
 
   const handleAddToCart = () => {
@@ -10,7 +10,8 @@ const ProductItem = ({ title, price, imageUrl }) => {
   };
 
   return (
-    <div id={title}>
+    <div id={id}>
+     
       <h3>{title}</h3>
       <div className="image-container">
         <img className="prod-images" src={imageUrl} alt="" />
