@@ -1,32 +1,60 @@
-// Header.js
 import React, { useState, useContext } from 'react';
 import { Nav, NavItem } from 'reactstrap';
-import { NavLink } from 'react-router-dom'; // Import NavLink from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom';
 import CartContext from './cart-context';
-import CartModal from './CartModel'; // Fix the import name
+import CartModal from './CartModal';
+import AuthContext from '../store/auth-context';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const { cartElements } = useContext(CartContext);
+  const authCtx = useContext(AuthContext);
   const [showCart, setShowCart] = useState(false);
+  const history = useNavigate();
 
   const handleCartToggle = () => {
     setShowCart(!showCart);
+  };
+
+  const isLoggedIn = authCtx.isLoggedIn;
+
+  const logoutHandler = () => {
+    authCtx.logOut();
+    localStorage.removeItem('token');
+    history('/login'); // Use history directly, no need for replace
   };
 
   return (
     <header>
       <Nav className="header">
         <NavItem>
-          <NavLink to="/" activeClassName="active-link">HOME</NavLink>
+          <NavLink to="/" activeClassName="active-link" exact>
+            HOME
+          </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/products" activeClassName="active-link">STORE</NavLink>
+          <NavLink to="/products" activeClassName="active-link">
+            STORE
+          </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/aboutus" activeClassName="active-link">ABOUT</NavLink>
+          <NavLink to="/aboutus" activeClassName="active-link">
+            ABOUT
+          </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/contact" activeClassName="active-link">CONTACT</NavLink>
+          <NavLink to="/contact" activeClassName="active-link">
+            CONTACT
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          {isLoggedIn ? (
+            <button onClick={logoutHandler}>Logout</button>
+          ) : (
+            <Link to="/login" className="active-link">
+              LOGIN
+            </Link>
+          )}
         </NavItem>
         <a href="#cart" className="cart-holder" onClick={handleCartToggle}>
           cart<span className="cart-number">{cartElements.length}</span>

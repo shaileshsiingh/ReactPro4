@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "./components/Header";
 import Products from "./components/Products";
 import Footer from "./components/Footer";
 import "./App.css"; // Add any custom styles in this file
 import CartProvider from "./components/CartProvider";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import BrowserRouter, Routes, and Route
+import { BrowserRouter as Router, Routes, Route , Navigate} from "react-router-dom"; // Import BrowserRouter, Routes, and Route
 import AboutPage from "./pages/About";
 import Home from "./pages/Home";
 import Contact from './pages/Contact'
 import ProductDetail from "./components/ProductDetail";
+import LoginPage from "./pages/LoginPage";
+import AuthContext from "./store/auth-context";
 
 const App = () => {
+  const authCtx = useContext(AuthContext)
+
   const productsArr = [
     {
       id:1,
@@ -56,6 +60,8 @@ const App = () => {
             <Route exact path="/products" element={<Products title="MUSIC" products={productsArr} />} />
             <Route exact path="/aboutus" element={<AboutPage/>} />
             <Route exact path="/contact" element={<Contact/>} />
+            <Route path="/login" element={authCtx.isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />
+
             <Route path="/products/:productId" element={<ProductDetail products={productsArr} />} />
           </Routes>
           <Footer />
