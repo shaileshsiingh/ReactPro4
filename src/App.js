@@ -4,7 +4,7 @@ import Products from "./components/Products";
 import Footer from "./components/Footer";
 import "./App.css"; // Add any custom styles in this file
 import CartProvider from "./components/CartProvider";
-import { BrowserRouter as Router, Routes, Route , Navigate} from "react-router-dom"; // Import BrowserRouter, Routes, and Route
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"; // Import BrowserRouter, Routes, and Route
 import AboutPage from "./pages/About";
 import Home from "./pages/Home";
 import Contact from './pages/Contact'
@@ -57,10 +57,11 @@ const App = () => {
           <Header />
           <Routes>
             <Route exact path="/" element={<Home/>}/>
-            <Route exact path="/products" element={<Products title="MUSIC" products={productsArr} />} />
+            <Route path="/products" element={authCtx.isLoggedIn ?<Products title="MUSIC" products={productsArr} />: <Navigate to="/" />} />
+
             <Route exact path="/aboutus" element={<AboutPage/>} />
             <Route exact path="/contact" element={<Contact/>} />
-            <Route path="/login" element={authCtx.isLoggedIn ? <Navigate to="/" /> : <LoginPage />} />
+            <Route path="/login" element={<LoginPage />} />
 
             <Route path="/products/:productId" element={<ProductDetail products={productsArr} />} />
           </Routes>

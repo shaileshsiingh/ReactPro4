@@ -33,9 +33,9 @@ const Header = () => {
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink to="/products" activeClassName="active-link">
+         {isLoggedIn && <Link to="/products" activeClassName="active-link">
             STORE
-          </NavLink>
+          </Link>}
         </NavItem>
         <NavItem>
           <NavLink to="/aboutus" activeClassName="active-link">
