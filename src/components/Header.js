@@ -2,7 +2,6 @@ import React, { useState, useContext } from 'react';
 import { Nav, NavItem } from 'reactstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import CartContext from './cart-context';
-import CartModal from './CartModal';
 import AuthContext from '../store/auth-context';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +20,7 @@ const Header = () => {
   const logoutHandler = () => {
     authCtx.logOut();
     localStorage.removeItem('token');
-    history('/login'); // Use history directly, no need for replace
+    history('/login'); 
   };
 
   return (
@@ -49,20 +48,20 @@ const Header = () => {
         </NavItem>
         <NavItem>
           {isLoggedIn ? (
-            <button onClick={logoutHandler}>Logout</button>
+            <button className="active-link" onClick={logoutHandler}>LOGOUT</button>
           ) : (
             <Link to="/login" className="active-link">
               LOGIN
             </Link>
           )}
         </NavItem>
-        <a href="#cart" className="cart-holder" onClick={handleCartToggle}>
-          cart<span className="cart-number">{cartElements.length}</span>
-        </a>
+        
+      {authCtx.isLoggedIn&& <Link to="/cart" className="cart-holder" onClick={handleCartToggle}>
+          Cart<span className="cart-number">{cartElements.length}</span>
+        </Link>}
       </Nav>
       <h1>The Generics</h1>
 
-      {showCart && <CartModal onClose={handleCartToggle} />}
     </header>
   );
 };

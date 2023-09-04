@@ -8,18 +8,17 @@ const CartModal = (props) => {
   return (
     <div >
       <h2>CART</h2>
-      <button  onClick={props.onClose}>
-        X
-      </button>
+
       <div>
         {elements.cartElements.map((item, index) => (
           <CartItem
+          userEmail={item.userEmail}
             key={index}
             title={item.title}
             price={item.price}
             imageUrl={item.imageUrl}
             quantity={item.quantity}
-            onRemove={elements.removeItem}
+            onRemove={()=>elements.removeItem(item.title)}
           />
         ))}
       </div>

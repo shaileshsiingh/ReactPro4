@@ -45,10 +45,10 @@ const LoginPage = () => {
       if (!response.ok) {
         alert(data.error.message )
       }
+      setIsLogin(true)
       authCtx.logIn(data.idToken)
       history('/products')
       console.log(data)
-      setIsLogin(true)
       
 
     } catch (error) {
@@ -56,11 +56,9 @@ const LoginPage = () => {
       alert('An error occurred.')
     }
   };
-
-
   return (
     <section className={classes.auth}>
-      <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
+      <h1>{isLogin ? 'Login to check Products ' : 'New User? Sign Up'}</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
           <label htmlFor='email'>Your Email</label>
