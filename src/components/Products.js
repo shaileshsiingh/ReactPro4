@@ -1,4 +1,3 @@
-// Products.js
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import ProductItem from './ProductItem';

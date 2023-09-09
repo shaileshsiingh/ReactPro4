@@ -46,7 +46,7 @@ const LoginPage = () => {
         alert(data.error.message )
       }
       setIsLogin(true)
-      authCtx.logIn(data.idToken)
+      authCtx.logIn(data.email)
       history('/products')
       console.log(data)
       

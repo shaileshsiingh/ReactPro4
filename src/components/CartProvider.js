@@ -1,40 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import CartContext from './cart-context';
+import  AuthContext  from '../store/auth-context'; 
 
 const CartProvider = (props) => {
   const [cartElements, setCartElements] = useState([]);
+  const apiUrl = 'https://crudcrud.com/api/6f4fa6121bd9475586bd2f74a81f428a/cart';
 
-  // Function to add an item to the cart (POST)
-  const addToCart = async (newItem,email) => {
+  const authContext = useContext(AuthContext); 
+
+  useEffect(() => {
+    const fetchCartData = async (email) => {
+      try {
+        const response = await axios.get(`${apiUrl}?email=${email}`);
+        if (response.status === 200) {
+          setCartElements(response.data);
+        } else {
+          alert('Failed to fetch');
+        }
+      } catch (error) {
+        console.log('Error');
+      }
+    };
+
+    if (authContext.isLoggedIn) {
+      fetchCartData(authContext.email);
+    }
+  }, [authContext]);
+
+  const addToCart = async (newItem) => {
     try {
-      const response = await axios.post(`https://crudcrud.com/api/0c43b761c06a4a879aed199a1bbcfb18/cart?email=${email}`, newItem);
-      
-      if (response.status === 201) {
-        // Successfully added item to the cart on the server
-        const addedItem = response.data;
-        setCartElements((prevCart) => [...prevCart, addedItem]);
-      } else {
-        console.error('Failed to add item to the cart on the server');
+      if (authContext.isLoggedIn) {
+        const response = await axios.post(`${apiUrl}?email=${authContext.email}`, newItem);
+        if (response.status === 201) {
+          const addedItem = response.data;
+          setCartElements((prevCart) => [...prevCart, addedItem]);
+        } else {
+          alert('Failed to add');
+        }
       }
     } catch (error) {
-      console.error('Error adding item to the cart:', error);
+      console.error('Error');
     }
   };
 
-  // Function to remove an item from the cart (DELETE)
   const removeFromCart = async (title) => {
-   
-        // Successfully removed item from the cart on the server
-        setCartElements((prevCart) =>
-          prevCart.filter((item) => item.title !== title)
-        );
-    
+    setCartElements((prevCart) => prevCart.filter((item) => item.title !== title));
   };
 
   const cartContext = {
     cartElements: cartElements,
-    totalAmount: 0, // You can calculate the total amount here
+    totalAmount: 0, 
     addItem: addToCart,
     removeItem: removeFromCart,
   };
